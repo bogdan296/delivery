@@ -1,0 +1,22 @@
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                dbname: '%env(resolve:DATABASE_NAME)%'
+                host: '%env(resolve:DATABASE_HOST)%'
+                port: '%env(resolve:DATABASE_PORT)%'
+                user: '%env(resolve:DATABASE_USER)%'
+                password: '%env(resolve:DATABASE_PASSWORD)%'
+                charset: "UTF8"
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        connection: default
+        mappings:
+            History:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/History/Infrastructure/Persistence/Doctrine/Mapping'
+                prefix: 'App\History'
+                alias: History
