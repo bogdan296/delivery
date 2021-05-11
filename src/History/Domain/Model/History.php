@@ -7,8 +7,32 @@ class History
     private int $id;
     private int $zipCode;
     private \DateTime $shipmentDate;
-    private \DateTime $endDate;
+    private \DateTime $deliveredDate;
     private \DateTime $orderDate;
+
+    /**
+     * @param \DateTime $orderDate
+     */
+    public function setOrderDate(\DateTime $orderDate): void
+    {
+        $this->orderDate = $orderDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDeliveredDate(): \DateTime
+    {
+        return $this->deliveredDate;
+    }
+
+    /**
+     * @param \DateTime $deliveredDate
+     */
+    public function setDeliveredDate(\DateTime $deliveredDate): void
+    {
+        $this->deliveredDate = $deliveredDate;
+    }
 
     /**
      * @return int
@@ -61,34 +85,8 @@ class History
     /**
      * @return \DateTime
      */
-    public function getEndDate(): \DateTime
-    {
-        return $this->endDate;
-    }
-
-    /**
-     * @param \DateTime $endDate
-     */
-    public function setEndDate(\DateTime $endDate): void
-    {
-        $this->endDate = $endDate;
-    }
-
-    /**
-     * @return \DateTime
-     */
     public function getOrderDate(): \DateTime
     {
         return $this->orderDate;
-    }
-
-    /**
-     * Sets the created field on PrePersist doctrine events.
-     *
-     * @throws \Exception
-     */
-    public function setOrderDate()
-    {
-        $this->orderDate = new \DateTime();
     }
 }

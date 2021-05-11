@@ -27,7 +27,6 @@ final class Version20210510154418 extends AbstractMigration
     shipment_date    datetime     not null,
     delivered_date     datetime   not null,
     order_date     datetime   not null,
-    created     datetime   not null,
     INDEX       zip_code_index (zip_code),
     INDEX       order_date_index (order_date),
     primary key (id)
