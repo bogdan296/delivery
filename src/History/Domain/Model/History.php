@@ -4,6 +4,7 @@ namespace App\History\Domain\Model;
 
 class History
 {
+    const ZIP_CODE = 'zipCode';
     private int $id;
     private int $zipCode;
     private \DateTime $shipmentDate;

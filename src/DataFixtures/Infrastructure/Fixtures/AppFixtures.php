@@ -69,7 +69,7 @@ class AppFixtures extends Fixture
      */
     private function generateDeliveryDate(\DateTime $shipmentDate): \DateTime
     {
-        $interval = mt_rand(3,14);
+        $interval = mt_rand(self::DELIVERY_MIN_DAYS,self::DELIVERY_MAX_DAYS);
         $deliveryDate = $shipmentDate->modify( '+'.$interval.' day');
 
         $deliveryDateDiff = $deliveryDate->diff($shipmentDate);
