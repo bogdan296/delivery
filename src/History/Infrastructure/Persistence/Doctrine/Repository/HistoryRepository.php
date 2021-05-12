@@ -11,17 +11,6 @@ use Psr\Log\LoggerInterface;
 
 class HistoryRepository extends ServiceEntityRepository implements HistoryRepositoryInterface
 {
-    private LoggerInterface $logger;
-
-    /**
-     * @param LoggerInterface $logger
-     * @required
-     */
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
-    }
-
     /**
      * @param ManagerRegistry $registry
      */
@@ -35,9 +24,9 @@ class HistoryRepository extends ServiceEntityRepository implements HistoryReposi
      * @param array|null $orderBy
      * @param null $limit
      * @param null $offset
-     * @return array
+     * @return array|null
      */
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null): array
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null): ?array
     {
         return parent::findBy($criteria, $orderBy, $limit, $offset);
     }
@@ -45,9 +34,9 @@ class HistoryRepository extends ServiceEntityRepository implements HistoryReposi
     /**
      * @param int $zipCode
      * @param array $range
-     * @return array
+     * @return array|null
      */
-    public function getDeliveryIntervals(int $zipCode, array $range): array
+    public function getDeliveryIntervals(int $zipCode, array $range): ?array
     {
         $range = RangeBuilder::buildRangeDate($range);
         $queryBuilder = $this->createQueryBuilder('d');

@@ -38,16 +38,13 @@ class DeliveryProcessor
     public function getDeliveryDays(int $zipCode, array $range = null): int
     {
         $deliveryInterval = [];
-        try {
-            if (empty($range)) {
-                $results = $this->historyRepository->findBy([History::ZIP_CODE => $zipCode]);
-            }
+        if (empty($range)) {
+            $results = $this->historyRepository->findBy([History::ZIP_CODE => $zipCode]);
+        } else {
             $results = $this->historyRepository->getDeliveryIntervals($zipCode , $range);
-        } catch (DeliveryDataNotFoundException $exception) {
-            $this->logger->error(
-                'DeliveryDataNotFoundException',
-                ['zip_code' => $zipCode, 'range' => $range]
-            );
+        }
+        if (null == $results) {
+            throw new DeliveryDataNotFoundException("No history data found.");
         }
         $count = count($results);
         foreach ($results as $result) {
@@ -58,6 +55,6 @@ class DeliveryProcessor
         }
 
         $days = array_sum($deliveryInterval) / $count;
-        return (int) $days;
+        return round($days);
     }
 }
